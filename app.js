@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const methods = require("./methods");
 const PORT = 5000;
-const URLS = ["/login/simple", "/login/pro"];
+const URLS = ["/v1/web/login/simple", "/v1/web/login/pro"];
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

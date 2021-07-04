@@ -12,7 +12,7 @@ const validatorPro = [
     .not()
     .isEmpty()
     .trim()
-    .isLength({ min: 4, max: 14 })
+    .isLength({ min: 4, max: 15 })
     .withMessage(textError)
     .custom((value) => {
       return isEnglish(value , textError)
