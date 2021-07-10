@@ -20,7 +20,6 @@ const listQuery = (req, res) => {
   };
   return res.status(200).json(data);
 };
-
 const listParams = (req, res) => {
   const {
     params: { page: currentPage },
@@ -41,6 +40,32 @@ const listParams = (req, res) => {
   return res.status(200).json(data);
 };
 
+const listUser = (req, res) => {
+  const {
+    query: { id },
+  } = req;
+  const data = values.find((value) => +value.id === +id);
+  if (!!data) {
+    return res.status(200).json(data);
+  } else {
+    const massage = "همچین کاربری وجود ندارذ.";
+    const statusCode = 400;
+    return res.status(400).json({ errors: { massage, statusCode } });
+  }
+};
+const listUserParams = (req ,res) =>{
+    const {
+        params: { id },
+    } = req;
+    const data = values.find((value) => +value.id === +id);
+    if (!!data) {
+        return res.status(200).json(data);
+    } else {
+        const massage = "همچین کاربری وجود ندارذ.";
+        const statusCode = 400;
+        return res.status(400).json({ errors: { massage, statusCode } });
+    }
+}
 const listPost = (req, res) => {
   const {
     body: { id, name },
@@ -49,9 +74,7 @@ const listPost = (req, res) => {
   if (!errors.isEmpty()) {
     const massage = handleError(errors);
     const statusCode = 400;
-    return res
-      .status(statusCode)
-      .json({ errors: { massage, statusCode } });
+    return res.status(statusCode).json({ errors: { massage, statusCode } });
   }
   if (!!id) {
     //upDate post
@@ -90,9 +113,7 @@ const listPut = (req, res) => {
   if (!errors.isEmpty()) {
     const massage = handleError(errors);
     const statusCode = 400;
-    return res
-      .status(statusCode)
-      .json({ errors: { massage, statusCode } });
+    return res.status(statusCode).json({ errors: { massage, statusCode } });
   }
   return +id > 0 && +id <= 25
     ? res.status(205).json({
@@ -123,25 +144,27 @@ const listDeleteData = (req, res) => {
         status: "error",
       });
 };
-const listDeleteQuery = (req ,res) =>{
+const listDeleteQuery = (req, res) => {
   const {
     params: { id },
   } = req;
   return +id > 0 && +id <= 25
-      ? res.status(200).json({
+    ? res.status(200).json({
         data: { massage: ` ایتم مورد نظر با ای دی ${id} پاک شد ` },
         status: "success",
       })
-      : res.status(400).jsonp({
+    : res.status(400).jsonp({
         errors: {
           massage: "کاربری با همچین ای دی یافت نشد.",
         },
         status: "error",
       });
-}
+};
 exports.listQuery = listQuery;
 exports.listParams = listParams;
 exports.listPost = listPost;
 exports.listPut = listPut;
 exports.listDeleteData = listDeleteData;
-exports.listDeleteQuery = listDeleteQuery
+exports.listDeleteQuery = listDeleteQuery;
+exports.listUser = listUser;
+exports.listUserParams = listUserParams

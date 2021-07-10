@@ -29,6 +29,8 @@ const validatorList = [
     .withMessage(textError),
 ];
 
+router.get("/user", listControl.listUser);
+router.get("/user/:id", listControl.listUserParams);
 router.get("/", listControl.listQuery);
 router.get("/:page", listControl.listParams);
 router.post("/", ...validatorList, listControl.listPost);
