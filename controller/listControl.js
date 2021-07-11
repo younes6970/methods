@@ -79,7 +79,7 @@ const listPost = (req, res) => {
   if (!!id) {
     //upDate post
     return +id > 0 && +id <= 25
-      ? res.status(205).json({
+      ? res.status(200).json({
           data: { massage: ` ایتم مورد نظر با نام ${name} آپدیت شد ` },
           status: "success",
           http: "post",
